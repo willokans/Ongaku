@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "350828163522",
+    "firebase_url": "https://ongaku-42ac5.firebaseio.com",
+    "project_id": "ongaku-42ac5",
+    "storage_bucket": "ongaku-42ac5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:350828163522:android:9a7e857780378496",
+        "android_client_info": {
+          "package_name": "willproject.com.ongaku"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "350828163522-e9u73nmspn8027r10qrntllk7u3eh62c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "willproject.com.ongaku",
+            "certificate_hash": "c2ba3f3dc18a2a14df9a28fee30ece5a39e49f1c"
+          }
+        },
+        {
+          "client_id": "350828163522-ca1ols71g80viv7jmg91hvopg2sjtg7d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC55OWe8BczZggT-17eY_5sa6Qz2OTSbd4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "350828163522-ca1ols71g80viv7jmg91hvopg2sjtg7d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
