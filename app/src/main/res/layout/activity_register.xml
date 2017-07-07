@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="willproject.com.ongaku.RegisterActivity"
+    android:background="@color/common_google_signin_btn_text_dark_default">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@mipmap/ongaku"
+        android:id="@+id/logo"
+        android:layout_marginTop="34dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/appName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ongaku"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/colorPrimaryDark"
+        android:layout_below="@+id/logo"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/signUpMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:width="250dp"
+        android:layout_marginTop="20dp"
+        android:textSize="15dp"
+        android:text="Sign up with your email address"
+        android:layout_below="@+id/appName"
+        android:layout_centerHorizontal="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:width="250dp"
+        android:hint="Full Name ..."
+        android:ems="10"
+        android:id="@+id/nameTextField"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/signUpMessage"
+        android:layout_alignStart="@+id/signUpMessage" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:width="250dp"
+        android:hint="Email ..."
+        android:ems="10"
+        android:id="@+id/email_Field"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/nameTextField"
+        android:layout_alignStart="@+id/signUpMessage" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:width="250dp"
+        android:hint="Password ..."
+        android:ems="10"
+        android:id="@+id/editTextPassword"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/email_Field"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/tandC"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:width="200dp"
+        android:layout_marginTop="20dp"
+        android:textColor="#000000"
+        android:textSize="10dp"
+        android:textAlignment="center"
+        android:text="By clicking on Sign up, you agree to our Terms of Service and Privacy Policy."
+        android:layout_below="@+id/editTextPassword"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:id="@+id/signUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_background"
+        android:height="25dp"
+        android:width="200dp"
+        android:layout_marginTop="20dp"
+        android:text="SIGN UP"
+        android:layout_below="@+id/tandC"
+        android:layout_alignStart="@+id/tandC" />
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/btn_background"
+        android:height="25dp"
+        android:width="200dp"
+        android:layout_marginTop="10dp"
+        android:text="BACK"
+        android:layout_below="@+id/signUp"
+        android:layout_alignStart="@+id/tandC" />
+
+</RelativeLayout>

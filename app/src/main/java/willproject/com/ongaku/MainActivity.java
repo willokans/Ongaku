@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
@@ -26,9 +29,20 @@ import com.google.firebase.auth.GoogleAuthProvider;
 public class MainActivity extends AppCompatActivity {
 
     private SignInButton mGoogleBtn;
+    private EditText mEmail;
+    private EditText mPassword;
+
+    private Button mSignIn;
+    private Button mSignUpWithEmail;
+
     private static final int RC_SIGN_IN = 1;
     private GoogleApiClient mGoogleApiClient;
+
+    //set up FirebaseAuth object
     private FirebaseAuth mAuth;
+
+    //set up firebase Auth Listener
+    private FirebaseAuth.AuthStateListener mAuthListerEmail;
 
     //Tag for log statement
     private static final String TAG = "MAIN_ACTIVITY";
@@ -42,7 +56,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //connect references
+        mEmail = (EditText) findViewById(R.id.email_Field);
+        mPassword = (EditText) findViewById(R.id.editTextPassword);
+        mSignIn = (Button) findViewById(R.id.signIn);
+        mSignUpWithEmail = (Button) findViewById(R.id.register);
+
+        mGoogleBtn = (SignInButton) findViewById(R.id.googleBtn);
+
+
+        //set reference for mAuth
         mAuth = FirebaseAuth.getInstance();
+
+        //create an on click listener for the login button
+        mSignIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //call on the sign in method when user clicks on the login button
+                startSignIn();
+
+            }
+        });
+
 
         //initiate AuthListener
         mAuthLister = new FirebaseAuth.AuthStateListener() {
@@ -55,7 +91,15 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        mGoogleBtn = (SignInButton) findViewById(R.id.googleBtn);
+        mAuthListerEmail = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if(firebaseAuth.getCurrentUser() == null) {
+                    startActivity(new Intent(MainActivity.this, HomeActivity.class));
+                }
+
+            }
+        };
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -76,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
 
-        //set onClick listener for signIn method
+        //set onClick listener for signIn method for goodle login
         mGoogleBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,21 +131,58 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
+
+
+    //start sign in method for email sign in
+    private void startSignIn() {
+
+        //sign in two field
+        String email = mEmail.getText().toString();
+        String password = mPassword.getText().toString();
+
+        //create sign in func
+        if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
+            Toast.makeText(MainActivity.this, "Please enter email address and password!", Toast.LENGTH_LONG).show();
+
+        } else {
+            mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+
+                    //check the status of task
+                    if(!task.isSuccessful()) {
+                        Toast.makeText(MainActivity.this, "Sign in Problem", Toast.LENGTH_LONG).show();
+                    }
+                }
+            });
+        }
+
+
+
+    }
+
+    //on Start method for google sign in
     @Override
     protected void onStart() {
         super.onStart();
 
         //set mAuthstart listener to mAuth
         mAuth.addAuthStateListener(mAuthLister);
+        mAuth.addAuthStateListener(mAuthListerEmail);
     }
 
 
 
+
+
+    //method for google sign in
     private void signIn() {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
+    //On Acticity Result for google sign in
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -120,6 +201,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //firebase Auth with google sign in method
     private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
 
